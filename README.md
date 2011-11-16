@@ -11,3 +11,6 @@ Checkout the code, copy `application/configs/application-dist.ini` to `applicati
     tracindex.tracUrl = "https://example.com/trac"
     tracindex.tracs[] = "someTrac"
     tracindex.tracs[] = "someOtherTrac"
+
+# Screenshot
+![Screenshot](https://github.com/vgnett/tracindex/raw/master/public/screenshots/tracindex.png "Screenshot of tracindex with some Trac environments")
