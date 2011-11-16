@@ -1,0 +1,18 @@
+header {
+    background-color: #eee;
+    border-bottom: 1px solid #ccc;
+    padding-top: 50px;
+}
+
+section {
+    padding-top: 40px;
+}
+
+table {
+    margin-bottom: 5px;
+}
+
+.twipsy-inner {
+    max-width: 500px;
+    text-align: left;
+}

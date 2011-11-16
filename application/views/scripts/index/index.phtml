@@ -1,0 +1,33 @@
+<?php $this->placeholder('tracs')->exchangeArray($this->tracs); ?>
+
+<div class="container">
+    <?php foreach ($this->tracs as $trac) { ?>
+    <section id="<?php echo $trac->getName() ?>">
+    <h2><?php echo $trac->getName() ?> <small><?php echo $num = count($trac->getTickets()) ?> ticket<?php echo $num != 1 ? 's' : '' ?></small></h2>
+        <table class="condensed-table zebra-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Summary</th>
+                    <th>Owner</th>
+                    <th>Reporter</th>
+                    <th>Created</th>
+                    <th>Updated</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($trac->getTickets() as $ticket) { ?>
+                <tr class="<?php echo $ticket->priority ?>">
+                    <td><a href="<?php echo $this->tracUrl ?>/<?php echo $trac->getName() ?>/ticket/<?php echo $ticket->id ?>">#<?php echo $ticket->id ?></a></td>
+                    <td><a rel="twipsy" href="<?php echo $this->tracUrl ?>/<?php echo $trac->getName() ?>/ticket/<?php echo $ticket->id ?>" data-original-title="<?php echo nl2br($ticket->description) ?>"><?php echo $this->escape($ticket->summary) ?></a></td>
+                    <td><?php echo $ticket->owner ?: '&lt;none&gt;' ?></td>
+                    <td><?php echo $ticket->reporter ?></td>
+                    <td><span class="moment"><?php echo date('r', substr($ticket->time, 0, -6)) ?></span></td>
+                    <td><span class="moment"><?php echo date('r', substr($ticket->changetime, 0, -6)) ?></span></td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </section>
+    <?php } ?>
+</div>

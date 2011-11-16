@@ -1,0 +1,16 @@
+<section>
+<div class="container">
+    <div class="alert-message error">
+    <p>Oh noes, you broke the internet! Error message: <strong><?php echo $this->message ?></strong></p>
+    </div>
+
+    <?php if (isset($this->exception)) { ?>
+    <h3>Stack trace:</h3>
+    <pre><?php echo $this->exception->getTraceAsString() ?></pre>
+    <?php } ?>
+
+    <h3>Request Parameters:</h3>
+    <pre><?php echo $this->escape(var_export($this->request->getParams(), true)) ?>
+    </pre>
+</div>
+</section>

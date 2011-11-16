@@ -1,0 +1,75 @@
+<?php
+// Add stylesheets
+$this->headLink()->appendStylesheet($this->baseUrl() . '/css/bootstrap-1.4.0.min.css')
+                 ->appendStylesheet($this->baseUrl() . '/css/tracindex.css');
+
+// Add javascript
+$this->headScript()->appendFile($this->baseUrl() . '/js/jquery-1.7.min.js')
+                   ->appendFile($this->baseUrl() . '/js/moment-1.1.1.min.js')
+                   ->appendFile($this->baseUrl() . '/js/bootstrap-1.4.0.scrollspy.js')
+                   ->appendFile($this->baseUrl() . '/js/bootstrap-1.4.0.twipsy.js')
+                   ->appendFile($this->baseUrl() . '/js/jquery.smooth-scroll.min.js');
+
+?>
+<?= $this->doctype() ?>
+<html lang="en">
+<head>
+    <?php echo $this->headTitle() ?>
+    <?php echo $this->headLink() ?>
+    <?php echo $this->headMeta() ?>
+</head>
+<body>
+    <div id="navbar" class="topbar" data-scrollspy="scrollspy">
+        <div class="topbar-inner">
+            <div class="container">
+                <a class="brand" href="<?php echo $this->baseUrl() ?>/">Trac index</a>
+                <ul class="nav">
+                    <li class="active"><a href="#overview">Overview</a></li>
+                    <?php foreach ($this->placeholder('tracs') as $trac) { ?>
+                    <li><a href="#<?php echo $trac->getName() ?>"><?php echo $trac->getName() ?></a></li>
+                    <?php } ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <header id="overview">
+        <div class="container">
+            <h1>Trac index <small>A listing of Trac environments and their respective tickets</small></h1>
+            <p>Below is a selection of Trac environments and their respective tickets. Click on the ticket ID to go directly to the Trac</p>
+        </div>
+    </header>
+
+    <?php echo $this->layout()->content ?>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="pull-right"><a class="smooth" href="#overview">Back to top</a></p>
+            <p>Powered by <a href="http://framework.zend.com/">Zend Framework</a>, <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter</a>, <a href="http://momentjs.com/">Moment.js</a> and <a href="http://jquery.com/">jQuery</a>.</p>
+            <p>Made by <a href="https://github.com/christeredvartsen">Christer Edvartsen</a> for <a href="http://www.vg.no/">Verdens Gang AS</a>. Source code available at <a href="https://github.com/vgnett/tracindex">github</a>.</p>
+        </div>
+    </footer>
+
+    <!-- script -->
+    <?php echo $this->headScript() ?>
+
+    <script type="text/javascript">
+        // Use moment relative dates
+        $(".moment").each(function() {
+            var timestamp = $(this).text();
+            $(this).text(moment(timestamp).fromNow());
+        });
+
+        // Twipsies (used for ticket descriptions)
+        $("a[rel=twipsy]").twipsy({
+            live: true,
+            placement: "below",
+            html: true,
+            fallback: "Missing description"
+        });
+
+        // Enable smooth scroll
+        $("#navbar a, a.smooth").smoothScroll();
+    </script>
+</body>
+</html>
