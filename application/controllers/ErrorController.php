@@ -10,7 +10,7 @@ class ErrorController extends Zend_Controller_Action {
         $errors = $this->_getParam('error_handler');
 
         if (!$errors || !$errors instanceof ArrayObject) {
-            $this->view->message = 'An error occured';
+            $this->view->message = 'An error occurred';
             return;
         }
 
